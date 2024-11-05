@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FitnessApp
 {
-    internal class FitnessAppContext : DbContext
+    public class FitnessAppContext : DbContext
     {
 
         public DbSet<User> Users { get; set; }

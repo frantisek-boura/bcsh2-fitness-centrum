@@ -4,10 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessApp"
+        xmlns:viewmodel="clr-namespace:FitnessApp.ViewModel"
+        xmlns:view="clr-namespace:FitnessApp.View"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="MainWindow" Height="470" Width="800">
-    <Border Background="#272537">
+        Title="MainWindow" Height="470" Width="800" Background="#272537">
+    <Window.Resources>
+        <DataTemplate x:Name="membersViewTemplate" DataType="{x:Type viewmodel:MembersViewModel}">
+            <view:MembersView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="lessonsViewTemplate" DataType="{x:Type viewmodel:LessonsViewModel}">
+            <view:LessonsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="reservationsViewTemplate" DataType="{x:Type viewmodel:ReservationsViewModel}">
+            <view:ReservationsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="userViewTemplate" DataType="{x:Type viewmodel:UserViewModel}">
+            <view:UserView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+    <Border >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -24,16 +40,16 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Fitness App" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" FontSize="22" Margin="10,0,0,0"/>
                 <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                    <Button Content="Members" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
-                    <Button Content="Lessons" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
-                    <Button Content="Reservations" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
-                    <Button Content="User Profile" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
+                    <Button Content="Members" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Click="MembersButton_Clicked" />
+                    <Button Content="Lessons" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Click="LessonsButton_Click" />
+                    <Button Content="Reservations" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Click="ReservationsButton_Clicked" />
+                    <Button Content="User Profile" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Click="UserProfileButton_Clicked" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                     <Button Content="Log Out" Margin="2" Height="50" Background="#272537" BorderBrush="#272537" Foreground="White" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
                 </StackPanel>
             </Grid>
-            <ContentControl Grid.Column="1" Margin="10"/>
+            <ContentControl Grid.Column="1" Margin="10" Height="430" Content="{Binding}"/>
         </Grid>
     </Border>
 </Window>

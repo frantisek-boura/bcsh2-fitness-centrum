@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\elpha\source\repos\FitnessApp\App.xaml
-11407045341
+5532981583
 
-14-839117841
+211827899703
 216-2024472687
-MainWindow.xaml;
+MainWindow.xaml;View\LessonsView.xaml;View\MembersView.xaml;View\ReservationsView.xaml;View\UserView.xaml;
 
 False
 

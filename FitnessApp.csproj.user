@@ -7,7 +7,33 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\LessonsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\MembersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ReservationsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LessonsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MembersView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ReservationsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="FitnessApp.View.MembersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FitnessApp.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="430" d:DesignWidth="580" Background="#272537">
+    <Grid>
+        <DataGrid Margin="20" ItemsSource="{Binding Members}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Registered On" Binding="{Binding RegisteredOn}" />
+                <DataGridTextColumn Header="Reservations Made" Binding="{Binding Reservations}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -124,3 +124,13 @@ C:\Users\elpha\source\repos\FitnessApp\bin\Debug\net8.0-windows\ru\Microsoft.Cod
 C:\Users\elpha\source\repos\FitnessApp\bin\Debug\net8.0-windows\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\elpha\source\repos\FitnessApp\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\elpha\source\repos\FitnessApp\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\FitnessApp.sourcelink.json
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LessonsView.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersView.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsView.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\UserView.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LessonsView.baml
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersView.baml
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsView.baml
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\UserView.baml
