@@ -4,15 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FitnessApp.View"
+             xmlns:converters="clr-namespace:FitnessApp.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="430" d:DesignWidth="580" Background="#272537">
+             d:DesignHeight="430" d:DesignWidth="580" >
+    <UserControl.Resources>
+        <converters:MemberReservationsCountConverter x:Key="MemberReservationsCountConverter" />
+        <converters:DateFormatConverter x:Key="DateFormatConverter" />
+    </UserControl.Resources>
     <Grid>
-        <DataGrid Margin="20" ItemsSource="{Binding Members}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="370"/>
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add Member" Margin="10" Width="100" Click="AddMember_Clicked" />
+            <Button Name="editButton" Content="Edit" Margin="10" Width="100" Click="Edit_Clicked" IsEnabled="False" />
+            <Button Name="removeButton" Content="Remove" Margin="10" Width="100" Click="Remove_Clicked" IsEnabled="False" />
+        </StackPanel>
+        <DataGrid Grid.Row="0" Name="dataGrid" ItemsSource="{Binding Members}" Margin="10" AutoGenerateColumns="False" SelectionChanged="DataGridSelection_Changed">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="Registered On" Binding="{Binding RegisteredOn}" />
-                <DataGridTextColumn Header="Reservations Made" Binding="{Binding Reservations}" />
+                <DataGridTextColumn Header="Registration Date" Width="*" Binding="{Binding RegisteredOn, Converter={StaticResource DateFormatConverter}}" />
+                <DataGridTextColumn Header="Number of Reservations" Width="*" Binding="{Binding Reservations, Converter={StaticResource MemberReservationsCountConverter}}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

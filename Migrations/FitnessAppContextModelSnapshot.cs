@@ -17,7 +17,7 @@ namespace FitnessApp.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
-            modelBuilder.Entity("FitnessApp.Lesson", b =>
+            modelBuilder.Entity("FitnessApp.Model.Lesson", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace FitnessApp.Migrations
                     b.ToTable("Lessons");
                 });
 
-            modelBuilder.Entity("FitnessApp.LessonType", b =>
+            modelBuilder.Entity("FitnessApp.Model.LessonType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace FitnessApp.Migrations
                     b.ToTable("LessonTypes");
                 });
 
-            modelBuilder.Entity("FitnessApp.Member", b =>
+            modelBuilder.Entity("FitnessApp.Model.Member", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace FitnessApp.Migrations
                     b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("FitnessApp.Reservation", b =>
+            modelBuilder.Entity("FitnessApp.Model.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace FitnessApp.Migrations
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("FitnessApp.User", b =>
+            modelBuilder.Entity("FitnessApp.Model.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,9 +123,9 @@ namespace FitnessApp.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FitnessApp.Lesson", b =>
+            modelBuilder.Entity("FitnessApp.Model.Lesson", b =>
                 {
-                    b.HasOne("FitnessApp.LessonType", "LessonType")
+                    b.HasOne("FitnessApp.Model.LessonType", "LessonType")
                         .WithMany("Lessons")
                         .HasForeignKey("LessonTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -134,15 +134,15 @@ namespace FitnessApp.Migrations
                     b.Navigation("LessonType");
                 });
 
-            modelBuilder.Entity("FitnessApp.Reservation", b =>
+            modelBuilder.Entity("FitnessApp.Model.Reservation", b =>
                 {
-                    b.HasOne("FitnessApp.Lesson", "Lesson")
+                    b.HasOne("FitnessApp.Model.Lesson", "Lesson")
                         .WithMany("Reservations")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FitnessApp.Member", "Member")
+                    b.HasOne("FitnessApp.Model.Member", "Member")
                         .WithMany("Reservations")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -153,17 +153,17 @@ namespace FitnessApp.Migrations
                     b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("FitnessApp.Lesson", b =>
+            modelBuilder.Entity("FitnessApp.Model.Lesson", b =>
                 {
                     b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("FitnessApp.LessonType", b =>
+            modelBuilder.Entity("FitnessApp.Model.LessonType", b =>
                 {
                     b.Navigation("Lessons");
                 });
 
-            modelBuilder.Entity("FitnessApp.Member", b =>
+            modelBuilder.Entity("FitnessApp.Model.Member", b =>
                 {
                     b.Navigation("Reservations");
                 });

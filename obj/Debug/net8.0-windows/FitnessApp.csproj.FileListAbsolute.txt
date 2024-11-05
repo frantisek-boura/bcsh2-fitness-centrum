@@ -134,3 +134,5 @@ C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LessonsView
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersView.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsView.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\UserView.baml
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersAddDialog.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersAddDialog.baml

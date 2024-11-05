@@ -1,5 +1,8 @@
-﻿using System;
+﻿using FitnessApp.Model;
+using FitnessApp.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,59 @@ namespace FitnessApp.View
         public MembersView()
         {
             InitializeComponent();
+        }
+
+        private void AddMember_Clicked(object sender, RoutedEventArgs e)
+        {
+            var membersAddDialog = new MembersAddDialog("", "");
+            membersAddDialog.Owner = Window.GetWindow(this);
+            bool? result = membersAddDialog.ShowDialog();
+            
+            if (result == true)
+            {
+                var viewmodel = (MembersViewModel) DataContext;
+                viewmodel.AddMember(membersAddDialog.FirstName, membersAddDialog.LastName);
+            }
+        }
+
+        private void DataGridSelection_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataGrid.SelectedItem == null || !(dataGrid.SelectedItem is Member))
+            {
+                editButton.IsEnabled = false;
+                removeButton.IsEnabled = false;
+                return;
+            } 
+
+            var row = (Member) dataGrid.SelectedItem;
+            var viewmodel = (MembersViewModel) DataContext;
+
+            editButton.IsEnabled = true;
+            removeButton.IsEnabled = true;
+            viewmodel.Selected = row;
+        }
+
+        private void Edit_Clicked(object sender, RoutedEventArgs e)
+        {
+            var viewmodel = (MembersViewModel) DataContext;
+            if (viewmodel.Selected == null) return;
+
+            var membersAddDialog = new MembersAddDialog(viewmodel.Selected.FirstName, viewmodel.Selected.LastName);
+            membersAddDialog.Owner = Window.GetWindow(this);
+            bool? result = membersAddDialog.ShowDialog();
+            
+            if (result == true)
+            {
+                viewmodel.EditMember(viewmodel.Selected, membersAddDialog.FirstName, membersAddDialog.LastName);
+            }
+        }
+
+        private void Remove_Clicked(object sender, RoutedEventArgs e)
+        {
+            var viewmodel = (MembersViewModel) DataContext;
+            if (viewmodel.Selected == null) return;
+
+            viewmodel.RemoveMember(viewmodel.Selected);
         }
     }
 }

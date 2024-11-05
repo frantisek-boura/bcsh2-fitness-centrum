@@ -10,6 +10,9 @@
     <Compile Update="View\LessonsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\MembersAddDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\MembersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +28,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\LessonsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MembersAddDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MembersView.xaml">
