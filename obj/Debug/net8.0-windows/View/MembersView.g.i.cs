@@ -78,7 +78,7 @@ namespace FitnessApp.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FitnessApp;V1.0.0.0;component/view/membersview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FitnessApp;component/view/membersview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\MembersView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

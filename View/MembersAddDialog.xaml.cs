@@ -29,6 +29,11 @@ namespace FitnessApp.View
             InitializeComponent();
             firstNameTextBox.Text = firstName;
             lastNameTextBox.Text = lastName;
+
+            if (firstName != "" && lastName != "")
+            {
+                dialogLabel.Content = "Edit Member";
+            }
         }
 
         private void Submit_Clicked(object sender, RoutedEventArgs e)

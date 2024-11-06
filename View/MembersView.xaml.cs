@@ -32,6 +32,7 @@ namespace FitnessApp.View
         {
             var membersAddDialog = new MembersAddDialog("", "");
             membersAddDialog.Owner = Window.GetWindow(this);
+            membersAddDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             bool? result = membersAddDialog.ShowDialog();
             
             if (result == true)
@@ -65,6 +66,7 @@ namespace FitnessApp.View
 
             var membersAddDialog = new MembersAddDialog(viewmodel.Selected.FirstName, viewmodel.Selected.LastName);
             membersAddDialog.Owner = Window.GetWindow(this);
+            membersAddDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             bool? result = membersAddDialog.ShowDialog();
             
             if (result == true)
@@ -77,6 +79,14 @@ namespace FitnessApp.View
         {
             var viewmodel = (MembersViewModel) DataContext;
             if (viewmodel.Selected == null) return;
+
+            bool result = MessageBox.Show(
+                $"Do you really want to delete Member {viewmodel.Selected.FirstName} {viewmodel.Selected.LastName}?",
+                "Remove member",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question) == MessageBoxResult.Yes;
+
+            if (!result) return;
 
             viewmodel.RemoveMember(viewmodel.Selected);
         }
