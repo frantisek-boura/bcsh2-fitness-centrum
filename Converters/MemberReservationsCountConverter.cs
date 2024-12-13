@@ -20,12 +20,12 @@ namespace FitnessApp.Converters
                 return collection.Count();
             }
 
-            return -1;
+            return 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException("ConvertBack is not implemented because it's not needed.");
+            return Binding.DoNothing; // Není potřeba convertit zpátky
         }
     }
 }

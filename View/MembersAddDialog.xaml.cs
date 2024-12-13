@@ -24,16 +24,9 @@ namespace FitnessApp.View
         public string? LastName { get; private set; }
 
 
-        public MembersAddDialog(string firstName, string lastName)
+        public MembersAddDialog()
         {
             InitializeComponent();
-            firstNameTextBox.Text = firstName;
-            lastNameTextBox.Text = lastName;
-
-            if (firstName != "" && lastName != "")
-            {
-                dialogLabel.Content = "Edit Member";
-            }
         }
 
         private void Submit_Clicked(object sender, RoutedEventArgs e)

@@ -9,25 +9,33 @@
              d:DesignHeight="430" d:DesignWidth="580" >
     <UserControl.Resources>
         <converters:MemberReservationsCountConverter x:Key="MemberReservationsCountConverter" />
-        <converters:DateFormatConverter x:Key="DateFormatConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="370"/>
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Add Member" Margin="10" Width="100" Click="AddMember_Clicked" />
-            <Button Name="editButton" Content="Edit" Margin="10" Width="100" Click="Edit_Clicked" IsEnabled="False" />
-            <Button Name="removeButton" Content="Remove" Margin="10" Width="100" Click="Remove_Clicked" IsEnabled="False" />
-        </StackPanel>
-        <DataGrid Grid.Row="0" Name="dataGrid" ItemsSource="{Binding Members}" Margin="10" AutoGenerateColumns="False" SelectionChanged="DataGridSelection_Changed">
+        <DataGrid Grid.Row="0" Name="dataGrid" ItemsSource="{Binding Members}" Margin="10"
+                  AutoGenerateColumns="False" SelectionChanged="DataGridSelection_Changed"
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="False" 
+                  AlternatingRowBackground="#F7F7F7" RowBackground="White"
+                  HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="Registration Date" Width="*" Binding="{Binding RegisteredOn, Converter={StaticResource DateFormatConverter}}" />
-                <DataGridTextColumn Header="Number of Reservations" Width="*" Binding="{Binding Reservations, Converter={StaticResource MemberReservationsCountConverter}}" />
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="2*" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="2*" />
+                <DataGridTextColumn Header="Registration Date" Binding="{Binding RegisteredOn, StringFormat=MM/dd/yyyy}" Width="2*" IsReadOnly="True" />
+                <DataGridTextColumn Header="Number of Reservations" Binding="{Binding Reservations, Converter={StaticResource MemberReservationsCountConverter}}" Width="2*" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="ToolTip" Value="The total number of reservations made by this member" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add Member" Margin="10" Width="100" Click="AddMember_Clicked" />
+            <Button Name="removeButton" Content="Remove" Margin="10" Width="100" Click="Remove_Clicked" IsEnabled="False" />
+        </StackPanel>
     </Grid>
 </UserControl>

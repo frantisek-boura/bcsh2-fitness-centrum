@@ -28,9 +28,24 @@ namespace FitnessApp.View
             InitializeComponent();
         }
 
+        private void DataGridSelection_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataGrid.SelectedItem == null || !(dataGrid.SelectedItem is Member))
+            {
+                removeButton.IsEnabled = false;
+                return;
+            } 
+
+            var row = (Member) dataGrid.SelectedItem;
+            var viewmodel = (MembersViewModel) DataContext;
+
+            removeButton.IsEnabled = true;
+            viewmodel.Selected = row;
+        }
+
         private void AddMember_Clicked(object sender, RoutedEventArgs e)
         {
-            var membersAddDialog = new MembersAddDialog("", "");
+            var membersAddDialog = new MembersAddDialog();
             membersAddDialog.Owner = Window.GetWindow(this);
             membersAddDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             bool? result = membersAddDialog.ShowDialog();
@@ -39,39 +54,6 @@ namespace FitnessApp.View
             {
                 var viewmodel = (MembersViewModel) DataContext;
                 viewmodel.AddMember(membersAddDialog.FirstName, membersAddDialog.LastName);
-            }
-        }
-
-        private void DataGridSelection_Changed(object sender, SelectionChangedEventArgs e)
-        {
-            if (dataGrid.SelectedItem == null || !(dataGrid.SelectedItem is Member))
-            {
-                editButton.IsEnabled = false;
-                removeButton.IsEnabled = false;
-                return;
-            } 
-
-            var row = (Member) dataGrid.SelectedItem;
-            var viewmodel = (MembersViewModel) DataContext;
-
-            editButton.IsEnabled = true;
-            removeButton.IsEnabled = true;
-            viewmodel.Selected = row;
-        }
-
-        private void Edit_Clicked(object sender, RoutedEventArgs e)
-        {
-            var viewmodel = (MembersViewModel) DataContext;
-            if (viewmodel.Selected == null) return;
-
-            var membersAddDialog = new MembersAddDialog(viewmodel.Selected.FirstName, viewmodel.Selected.LastName);
-            membersAddDialog.Owner = Window.GetWindow(this);
-            membersAddDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            bool? result = membersAddDialog.ShowDialog();
-            
-            if (result == true)
-            {
-                viewmodel.EditMember(viewmodel.Selected, membersAddDialog.FirstName, membersAddDialog.LastName);
             }
         }
 
@@ -84,11 +66,12 @@ namespace FitnessApp.View
                 $"Do you really want to delete Member {viewmodel.Selected.FirstName} {viewmodel.Selected.LastName}?",
                 "Remove member",
                 MessageBoxButton.YesNo,
-                MessageBoxImage.Question) == MessageBoxResult.Yes;
+                MessageBoxImage.Question
+            ) == MessageBoxResult.Yes;
 
-            if (!result) return;
-
-            viewmodel.RemoveMember(viewmodel.Selected);
+            if (result) {
+                viewmodel.RemoveMember(viewmodel.Selected);
+            }
         }
     }
 }

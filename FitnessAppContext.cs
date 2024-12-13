@@ -11,7 +11,6 @@ namespace FitnessApp
         public DbSet<User> Users { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
-        public DbSet<LessonType> LessonTypes { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public string DbPath { get; }
 

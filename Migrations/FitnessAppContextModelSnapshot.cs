@@ -26,36 +26,20 @@ namespace FitnessApp.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("HappeningOn")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("LessonTypeId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.HasIndex("LessonTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Lessons");
-                });
-
-            modelBuilder.Entity("FitnessApp.Model.LessonType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LessonTypes");
                 });
 
             modelBuilder.Entity("FitnessApp.Model.Member", b =>
@@ -123,17 +107,6 @@ namespace FitnessApp.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FitnessApp.Model.Lesson", b =>
-                {
-                    b.HasOne("FitnessApp.Model.LessonType", "LessonType")
-                        .WithMany("Lessons")
-                        .HasForeignKey("LessonTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LessonType");
-                });
-
             modelBuilder.Entity("FitnessApp.Model.Reservation", b =>
                 {
                     b.HasOne("FitnessApp.Model.Lesson", "Lesson")
@@ -156,11 +129,6 @@ namespace FitnessApp.Migrations
             modelBuilder.Entity("FitnessApp.Model.Lesson", b =>
                 {
                     b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("FitnessApp.Model.LessonType", b =>
-                {
-                    b.Navigation("Lessons");
                 });
 
             modelBuilder.Entity("FitnessApp.Model.Member", b =>

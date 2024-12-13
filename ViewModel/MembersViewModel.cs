@@ -23,19 +23,50 @@ namespace FitnessApp.ViewModel
 
         public MembersViewModel()
         {
-            LoadDataAsync();
+            using (var context = new FitnessAppContext())
+            {
+                var members = context.Members.Include(m => m.Reservations).ToList();
+                Members = new ObservableCollection<Member>(members);
+                foreach (var member in Members)
+                {
+                    member.PropertyChanged += Member_PropertyChanged;
+                }
+                Members.CollectionChanged += Members_CollectionChanged;
+            }
         }
 
-        private async void LoadDataAsync()
+        private void Member_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            try
+            if (sender is Member member)
             {
-                var ctx = new FitnessAppContext();
-                var members = await ctx.Members.Include(m => m.Reservations).ToListAsync();
-                Members = new ObservableCollection<Member>(members);
-            } catch
+                using (var context = new FitnessAppContext())
+                {
+                    context.Members.Update(member);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        private void Members_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            using (var context = new FitnessAppContext())
             {
-                Trace.WriteLine("Chyba DB");
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+                    foreach (Member member in e.NewItems)
+                    {
+                        context.Members.Add(member);
+                        member.PropertyChanged += Member_PropertyChanged;
+                    }
+                }
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (Member member in e.OldItems)
+                    {
+                        context.Members.Remove(member);
+                        member.PropertyChanged -= Member_PropertyChanged;
+                    }
+                }
+                context.SaveChanges();
             }
         }
 
@@ -48,47 +79,12 @@ namespace FitnessApp.ViewModel
                 RegisteredOn = DateTime.Now
             };
 
-            using (var ctx = new FitnessAppContext())
-            {
-                var memberEntry = ctx.Members.Add(member);
-                ctx.SaveChanges();
-
-                var addedMember = memberEntry.Entity;
-
-                Members.Add(addedMember);
-            }
-
+            Members.Add(member);
         }
 
         internal void RemoveMember(Member member)
         {
-            using (var ctx = new FitnessAppContext())
-            {
-                var memberEntry = ctx.Members.Remove(member);
-                if (memberEntry == null) return;
-
-                var removedMember = memberEntry.Entity;
-                ctx.SaveChanges();
-
-                Members.Remove(removedMember);
-            }
-        }
-
-        internal void EditMember(Member member, string firstName, string lastName)
-        {
-            using (var ctx = new FitnessAppContext())
-            {
-                var editedMember = ctx.Members.FirstOrDefault(m => m.Id == member.Id);
-
-                if (editedMember == null) return;
-
-                editedMember.FirstName = firstName;
-                editedMember.LastName = lastName;
-                ctx.SaveChanges();
-
-                Members.Remove(member);
-                Members.Add(editedMember);
-            }
+            Members.Remove(member);
         }
     }
 }
