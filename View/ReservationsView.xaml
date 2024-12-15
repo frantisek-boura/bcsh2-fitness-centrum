@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FitnessApp.View"
+             xmlns:local="clr-namespace:FitnessApp.View" 
+             xmlns:viewmodel="clr-namespace:FitnessApp.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="430" d:DesignWidth="580" Background="#272537">
+             d:DesignHeight="430" d:DesignWidth="580">
+    <UserControl.DataContext>
+        <viewmodel:ReservationsViewModel/>
+    </UserControl.DataContext>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="320"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <TextBox Name="filterMemberFirstName" Width="100" Margin="5" />
+            <TextBox Name="filterMemberLastName" Width="100" Margin="5" />
+            <TextBox Name="filterLessonType" Width="100" Margin="5" />
+            <DatePicker Name="filterReservationDate" Width="100" Margin="5"  />
+            <Button Content="Filter" Width="80" Margin="5" Click="FilterButton_Click" HorizontalContentAlignment="Center" />
+            <Button Content="X" Width="20" Margin="5" Click="ClearFilterButton_Click" HorizontalContentAlignment="Center" />
+        </StackPanel>
+        <DataGrid Grid.Row="1" Name="dataGrid" ItemsSource="{Binding Reservations}" Margin="10"
+           AutoGenerateColumns="False" SelectionChanged="DataGridSelection_Changed"
+           CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="False"
+           AlternatingRowBackground="#F7F7F7" RowBackground="White"
+           HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Member" Binding="{Binding Path=Member}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Lesson" Binding="{Binding Path=Lesson}" Width="2*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Reservation created on" Binding="{Binding Path=CreatedOn, StringFormat=MM/dd/yyyy}"  Width="2*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add Reservation" Margin="10" Width="120" Click="AddReservation_Clicked" />
+            <Button Name="removeButton" Content="Remove Reservation" Margin="10" Width="120" Click="RemoveReservation_Clicked" IsEnabled="False" />
+            <Button Name="editButton" Content="Edit Reservation" Margin="10" Width="120" Click="EditReservation_Clicked" IsEnabled="False" />
+        </StackPanel>
     </Grid>
 </UserControl>

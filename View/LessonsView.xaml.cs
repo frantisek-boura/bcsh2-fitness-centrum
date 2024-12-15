@@ -23,19 +23,13 @@ namespace FitnessApp.View
     /// </summary>
     public partial class LessonsView : UserControl
     {
+        public Lesson Selected { get; set; }
+
         public LessonsView()
         {
             InitializeComponent();
         }
 
-/*        private void DataGrid_CurrentCellChanged(object sender, EventArgs e)
-        {
-            if (dataGrid.CommitEdit(DataGridEditingUnit.Row, true))
-            {
-                Trace.WriteLine("Commit");
-            }
-        }
-*/
         private void DataGridSelection_Changed(object sender, SelectionChangedEventArgs e)
         {
             if (dataGrid.SelectedItem == null || !(dataGrid.SelectedItem is Lesson))
@@ -44,11 +38,9 @@ namespace FitnessApp.View
                 return;
             }
 
-            var row = (Lesson) dataGrid.SelectedItem;
-            var viewmodel = (LessonsViewModel) DataContext;
-
+            var row = dataGrid.SelectedItem as Lesson;
             removeButton.IsEnabled = true;
-            viewmodel.Selected = row;
+            Selected = row;
         }
 
         private void AddLesson_Clicked(object sender, RoutedEventArgs e)
@@ -68,10 +60,10 @@ namespace FitnessApp.View
         private void Remove_Clicked(object sender, RoutedEventArgs e)
         {
             var viewmodel = (LessonsViewModel) DataContext;
-            if (viewmodel.Selected == null) return;
+            if (Selected == null) return;
 
             bool result = MessageBox.Show(
-                $"Do you really want to delete Lesson {viewmodel.Selected.Name}?",
+                $"Do you really want to delete selected lessons?",
                 "Remove lesson",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
@@ -79,13 +71,8 @@ namespace FitnessApp.View
 
             if (result)
             {
-                viewmodel.RemoveLesson(viewmodel.Selected);
+                viewmodel.RemoveLesson(Selected);
             }
-        }
-
-        private void dataGrid_CurrentCellChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Model
 {
-    public class Lesson : INotifyPropertyChanged 
+    public class Lesson : INotifyPropertyChanged, IComparable
     {
 
         private string _name;
@@ -86,5 +86,16 @@ namespace FitnessApp.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public override string? ToString()
+        {
+            return $"{_name} ({_type}) {Reservations.Count()}/{_capacity} {_date.ToString("MM-dd-yyyy")}";
+        }
+
+        public int CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            return string.Compare(this.Name, (other as Lesson).Name, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

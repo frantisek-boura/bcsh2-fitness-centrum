@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Model
 {
-    public class Member : INotifyPropertyChanged
+    public class Member : INotifyPropertyChanged, IComparable
     {
 
         private string _firstName;
@@ -52,6 +52,8 @@ namespace FitnessApp.Model
 
         public ICollection<Reservation> Reservations { get; } = new List<Reservation>();
 
+        public string FullName => $"{LastName} {FirstName}";
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -59,5 +61,16 @@ namespace FitnessApp.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public override string? ToString()
+        {
+            return FullName;
+        }
+
+        public int CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            return string.Compare(this.LastName, (other as Member).LastName, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

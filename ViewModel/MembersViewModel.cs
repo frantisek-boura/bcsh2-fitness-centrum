@@ -19,7 +19,6 @@ namespace FitnessApp.ViewModel
     {
 
         public ObservableCollection<Member> Members { get; set; }
-        public Member? Selected { get; set; }
 
         public MembersViewModel()
         {

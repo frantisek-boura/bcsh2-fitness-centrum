@@ -23,6 +23,8 @@ namespace FitnessApp.View
     /// </summary>
     public partial class MembersView : UserControl
     {
+        public Member Selected { get; set; }
+
         public MembersView()
         {
             InitializeComponent();
@@ -36,11 +38,9 @@ namespace FitnessApp.View
                 return;
             } 
 
-            var row = (Member) dataGrid.SelectedItem;
-            var viewmodel = (MembersViewModel) DataContext;
-
+            var row = dataGrid.SelectedItem as Member;
             removeButton.IsEnabled = true;
-            viewmodel.Selected = row;
+            Selected = row;
         }
 
         private void AddMember_Clicked(object sender, RoutedEventArgs e)
@@ -60,17 +60,17 @@ namespace FitnessApp.View
         private void Remove_Clicked(object sender, RoutedEventArgs e)
         {
             var viewmodel = (MembersViewModel) DataContext;
-            if (viewmodel.Selected == null) return;
+            if (Selected == null) return;
 
             bool result = MessageBox.Show(
-                $"Do you really want to delete Member {viewmodel.Selected.FirstName} {viewmodel.Selected.LastName}?",
+                $"Do you really want to delete selected members?",
                 "Remove member",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
             ) == MessageBoxResult.Yes;
 
             if (result) {
-                viewmodel.RemoveMember(viewmodel.Selected);
+                viewmodel.RemoveMember(Selected);
             }
         }
     }
