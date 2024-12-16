@@ -43,6 +43,10 @@ namespace FitnessApp.Model
             {
                 if (_capacity != value)
                 {
+                    if (value < Reservations.Count)
+                    {
+                        value = Reservations.Count;
+                    }
                     _capacity = value;
                     OnPropertyChanged();
                 }

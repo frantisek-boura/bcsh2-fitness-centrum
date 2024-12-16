@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.Collections.Generic;
@@ -69,9 +70,20 @@ namespace FitnessApp.View
                 memberComboBox.ItemsSource = mList;
                 memberComboBox.SelectedIndex = mIndex;
 
-                List<Lesson> lList = context.Lessons.ToList();
-                int lIndex = FindLessonIndex(l, lList);
-                lessonComboBox.ItemsSource = lList;
+                List<Lesson> lList = context.Lessons.Include(l => l.Reservations).ToList();
+                List<Lesson> availableLessons = new List<Lesson>();
+                foreach (var lesson in lList)
+                {
+                    if (lesson.Id == l.Id) continue;
+                    int currentCount = context.Reservations.Include(r => r.Lesson).Where(r => r.Lesson.Id == lesson.Id).Count();
+                    if (currentCount < lesson.Capacity)
+                    {
+                        availableLessons.Add(lesson);
+                    }
+                }
+                availableLessons.Add(l);
+                int lIndex = FindLessonIndex(l, availableLessons);
+                lessonComboBox.ItemsSource = availableLessons;
                 lessonComboBox.SelectedIndex = lIndex;
             }
         }

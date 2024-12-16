@@ -19,7 +19,7 @@
     <Compile Update="View\ReservationsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserView.xaml.cs">
+    <Compile Update="View\LogInView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -48,7 +48,10 @@
     <Page Update="View\ReservationsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserView.xaml">
+    <Page Update="View\DefaultView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LogInView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

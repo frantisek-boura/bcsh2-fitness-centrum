@@ -1,6 +1,8 @@
 ﻿using FitnessApp.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,9 +35,20 @@ namespace FitnessApp.View
             
             using (var context = new FitnessAppContext())
             {
-                memberComboBox.ItemsSource = context.Members.ToList();
+                var members = context.Members.ToList();
+                var lessons = context.Lessons.Include(l => l.Reservations).ToList();
+                var availableLessons = new List<Lesson>();
+                foreach (var lesson in lessons)
+                {
+                    int currentCount = context.Reservations.Include(r => r.Lesson).Where(r => r.Lesson.Id == lesson.Id).Count();
+                    if (currentCount < lesson.Capacity)
+                    {
+                        availableLessons.Add(lesson);
+                    }
+                }
+                memberComboBox.ItemsSource = members;
                 memberComboBox.SelectedIndex = 0;
-                lessonComboBox.ItemsSource = context.Lessons.ToList();
+                lessonComboBox.ItemsSource = availableLessons;
                 lessonComboBox.SelectedIndex = 0;
             }
         }

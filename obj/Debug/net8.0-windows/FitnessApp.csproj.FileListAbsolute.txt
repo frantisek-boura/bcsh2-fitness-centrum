@@ -128,12 +128,10 @@ C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\FitnessApp.sourc
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LessonsView.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersView.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsView.g.cs
-C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\UserView.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LessonsView.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersView.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsView.baml
-C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\UserView.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersAddDialog.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\MembersAddDialog.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LessonsAddDialog.g.cs
@@ -142,3 +140,8 @@ C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\Reservation
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsAddDialog.baml
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsEditDialog.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\ReservationsEditDialog.baml
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\DefaultView.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\DefaultView.baml
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LogInView.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LogInView.baml
+C:\Users\elpha\source\repos\FitnessApp\bin\Debug\net8.0-windows\BCrypt.Net-Next.dll

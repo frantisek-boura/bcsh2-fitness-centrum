@@ -24,18 +24,12 @@ namespace FitnessApp.ViewModel
     {
 
         public ObservableCollection<Reservation> Reservations { get; set; }
-        public ObservableCollection<Member> Members { get; set; }
-        public ObservableCollection<Lesson> Lessons { get; set; }
         private ActiveFilters activeFilters;
 
         public ReservationsViewModel()
         {
             using (var context = new FitnessAppContext())
             {
-                var members = context.Members.ToList();
-                var lessons = context.Lessons.ToList();
-                Members = new ObservableCollection<Member>(members);
-                Lessons = new ObservableCollection<Lesson>(lessons);
             }
             var reservations = Init();
             Reservations = new ObservableCollection<Reservation>(reservations);

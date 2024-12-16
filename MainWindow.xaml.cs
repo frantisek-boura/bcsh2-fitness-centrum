@@ -1,6 +1,8 @@
-﻿using FitnessApp.ViewModel;
+﻿using FitnessApp.Model;
+using FitnessApp.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
@@ -19,8 +21,26 @@ namespace FitnessApp
     {
 
         public MainWindow() 
-        { 
-            
+        {
+            InitializeComponent();
+            logInButton.IsEnabled = true;
+            membersButton.IsEnabled = false;
+            lessonsButton.IsEnabled = false;
+            reservationsButton.IsEnabled = false;
+            logOutButton.IsEnabled = false;
+            DataContext = new DefaultViewModel();
+
+            // admin ucet
+            using (var context = new FitnessAppContext())
+            {
+                if (context.Users.FirstOrDefault(u => u.Login == "Admin") == null)
+                {
+                    // Admin, Heslo123
+                    var user = new User { Login = "Admin", PasswordBcrypt = "$2a$04$Ny8ejTXHidAhp3NAudfpvuABuTsk/aLbV.606iaItWMzPJW9rFS1." };
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
+            }
         }
 
         private async void MembersButton_Clicked(object sender, RoutedEventArgs e)
@@ -47,12 +67,42 @@ namespace FitnessApp
             });
         }
 
-        private async void UserProfileButton_Clicked(object sender, RoutedEventArgs e)
+        private async void LogInButton_Clicked(object sender, RoutedEventArgs e)
         {
+            var logInViewModel = await Task.Run(() =>
+            {
+                return new LogInViewModel();
+            });
+
+            logInViewModel.LoggedInChanged += LogInViewModel_PropertyChanged;
+            DataContext = logInViewModel;
+        }
+
+        private void LogInViewModel_PropertyChanged(bool isLoggedIn)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                UpdateButtonStates(isLoggedIn);
+            });
+        }
+
+        private async void UpdateButtonStates(bool isLoggedIn)
+        {
+            logInButton.IsEnabled = !isLoggedIn;
+            membersButton.IsEnabled = isLoggedIn;
+            lessonsButton.IsEnabled = isLoggedIn;
+            reservationsButton.IsEnabled = isLoggedIn;
+            logOutButton.IsEnabled = isLoggedIn;
+
             DataContext = await Task.Run(() =>
             {
-                return new UserViewModel();
+                return new DefaultViewModel();
             });
+        }
+
+        private void LogOutButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonStates(false);
         }
     }
 }

@@ -98,7 +98,7 @@ namespace FitnessApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PasswordMD5")
+                    b.Property<string>("PasswordBcrypt")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -14,6 +14,6 @@ namespace FitnessApp.Model
         public string Login { get; set; }
 
         [Required]
-        public string PasswordMD5 { get; set; }
+        public string PasswordBcrypt { get; set; }
     }
 }

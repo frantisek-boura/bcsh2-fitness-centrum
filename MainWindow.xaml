@@ -19,8 +19,11 @@
         <DataTemplate x:Name="reservationsViewTemplate" DataType="{x:Type viewmodel:ReservationsViewModel}">
             <view:ReservationsView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="userViewTemplate" DataType="{x:Type viewmodel:UserViewModel}">
-            <view:UserView DataContext="{Binding}"/>
+        <DataTemplate x:Name="logInViewTemplate" DataType="{x:Type viewmodel:LogInViewModel}">
+            <view:LogInView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="defaultViewTemplate" DataType="{x:Type viewmodel:DefaultViewModel}">
+            <view:DefaultView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
     <Border >
@@ -40,13 +43,13 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Fitness App" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Margin="10"/>
                 <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                    <Button Content="Members" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="MembersButton_Clicked" />
-                    <Button Content="Lessons" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LessonsButton_Click" />
-                    <Button Content="Reservations" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="ReservationsButton_Clicked" />
-                    <Button Content="User Profile" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="UserProfileButton_Clicked" />
+                    <Button Name="membersButton" Content="Members" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="MembersButton_Clicked" />
+                    <Button Name="lessonsButton" Content="Lessons" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LessonsButton_Click" />
+                    <Button Name="reservationsButton" Content="Reservations" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="ReservationsButton_Clicked" />
+                    <Button Name="logInButton" Content="Log In" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LogInButton_Clicked" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
-                    <Button Content="Log Out" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                    <Button Name="logOutButton" Content="Log Out" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LogOutButton_Clicked" />
                 </StackPanel>
             </Grid>
             <ContentControl Grid.Column="1" Margin="10" Height="430" Content="{Binding}"/>

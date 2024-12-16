@@ -33,7 +33,18 @@ namespace FitnessApp.View
         {
             FirstName = firstNameTextBox.Text;
             LastName = lastNameTextBox.Text;
-            DialogResult = true;
+            
+            if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName))
+            {
+                MessageBox.Show(
+                $"Empty First Name or Last Name",
+                "Invalid input",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            } else
+            {
+                DialogResult = true;
+            }
         }
 
         private void Cancel_Clicked(object sender, RoutedEventArgs e)

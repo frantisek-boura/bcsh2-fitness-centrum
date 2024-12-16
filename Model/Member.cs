@@ -52,7 +52,7 @@ namespace FitnessApp.Model
 
         public ICollection<Reservation> Reservations { get; } = new List<Reservation>();
 
-        public string FullName => $"{LastName} {FirstName}";
+        public string FullName => $"{_firstName} {_lastName}";
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

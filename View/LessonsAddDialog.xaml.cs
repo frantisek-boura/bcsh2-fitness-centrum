@@ -33,18 +33,28 @@ namespace FitnessApp.View
 
         private void Submit_Clicked(object sender, RoutedEventArgs e)
         {
-            Name = nameTextBox.Text;
-            Type = typeTextBox.Text;
-            Date = dateDatePicker.SelectedDate;
             int capacity = 0;
-            if (int.TryParse(capacityTextBox.Text, out capacity))
+
+
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(typeTextBox.Text) || !dateDatePicker.SelectedDate.HasValue)
             {
-                Capacity = capacity;
-                DialogResult = true;
-            } else
+                MessageBox.Show(
+                $"Empty fields",
+                "Invalid input",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+                return;
+            } else if (!int.TryParse(capacityTextBox.Text, out capacity))
             {
                 MessageBox.Show($"Value {capacityTextBox.Text} is not a valid number", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            } else
+            {
+                Name = nameTextBox.Text;
+                Type = typeTextBox.Text;
+                Date = dateDatePicker.SelectedDate;
+                Capacity = capacity;
+                DialogResult = true;
             }
         }
 
