@@ -21,6 +21,11 @@ namespace FitnessApp.View
     /// </summary>
     public partial class DefaultView : UserControl
     {
+        
+        public DefaultView()
+        {
+            InitializeComponent();
+        }
 
     }
 }

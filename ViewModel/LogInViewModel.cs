@@ -14,6 +14,7 @@ namespace FitnessApp.ViewModel
     public class LogInViewModel 
     {
 
+        private string _username;
         private bool _loggedIn;
         public bool LoggedIn
         {
@@ -28,11 +29,11 @@ namespace FitnessApp.ViewModel
             }
         }
 
-        public event Action<bool> LoggedInChanged;
+        public event Action<bool, string> LoggedInChanged;
 
         protected void OnLoggedInChanged() 
         {
-            LoggedInChanged?.Invoke(_loggedIn);
+            LoggedInChanged?.Invoke(_loggedIn, _username);
         }
 
         internal bool LogIn(string login, string password)
@@ -51,6 +52,7 @@ namespace FitnessApp.ViewModel
                     return false;
                 }
 
+                _username = login;
                 LoggedIn = true;
                 return true;
             }

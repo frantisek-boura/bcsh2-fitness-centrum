@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Model;
+using FitnessApp.View;
 using FitnessApp.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,19 +29,9 @@ namespace FitnessApp
             lessonsButton.IsEnabled = false;
             reservationsButton.IsEnabled = false;
             logOutButton.IsEnabled = false;
-            DataContext = new DefaultViewModel();
+            createUserButton.IsEnabled = true;
+            DataContext = new DefaultViewModel(null);
 
-            // admin ucet
-            using (var context = new FitnessAppContext())
-            {
-                if (context.Users.FirstOrDefault(u => u.Login == "Admin") == null)
-                {
-                    // Admin, Heslo123
-                    var user = new User { Login = "Admin", PasswordBcrypt = "$2a$04$Ny8ejTXHidAhp3NAudfpvuABuTsk/aLbV.606iaItWMzPJW9rFS1." };
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                }
-            }
         }
 
         private async void MembersButton_Clicked(object sender, RoutedEventArgs e)
@@ -67,6 +58,43 @@ namespace FitnessApp
             });
         }
 
+        private void CreateUserButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            var createUserDialog = new CreateUserDialog();
+            createUserDialog.Owner = Window.GetWindow(this);
+            createUserDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            bool? result = createUserDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string hash = BCrypt.Net.BCrypt.HashPassword(createUserDialog.Password);
+                string login = createUserDialog.Login;
+                using (var context = new FitnessAppContext())
+                {
+                    if (context.Users.FirstOrDefault(u => u.Login == login) != null)
+                    {
+                        MessageBox.Show(
+                            $"User with login {login} already exists",
+                            "Remove member",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error
+                        );
+                        return;
+                    }
+
+                    var user = new User { Login = login, PasswordBcrypt = hash };
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                    MessageBox.Show(
+                        $"User with login {login} added successfully",
+                        "Remove member",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information
+                    );
+                }
+            }
+        }
+
         private async void LogInButton_Clicked(object sender, RoutedEventArgs e)
         {
             var logInViewModel = await Task.Run(() =>
@@ -78,15 +106,15 @@ namespace FitnessApp
             DataContext = logInViewModel;
         }
 
-        private void LogInViewModel_PropertyChanged(bool isLoggedIn)
+        private void LogInViewModel_PropertyChanged(bool isLoggedIn, string login)
         {
             Dispatcher.Invoke(() =>
             {
-                UpdateButtonStates(isLoggedIn);
+                UpdateButtonStates(isLoggedIn, login);
             });
         }
 
-        private async void UpdateButtonStates(bool isLoggedIn)
+        private async void UpdateButtonStates(bool isLoggedIn, string? login)
         {
             logInButton.IsEnabled = !isLoggedIn;
             membersButton.IsEnabled = isLoggedIn;
@@ -96,13 +124,13 @@ namespace FitnessApp
 
             DataContext = await Task.Run(() =>
             {
-                return new DefaultViewModel();
+                return new DefaultViewModel(login);
             });
         }
 
         private void LogOutButton_Clicked(object sender, RoutedEventArgs e)
         {
-            UpdateButtonStates(false);
+            UpdateButtonStates(false, null);
         }
     }
 }

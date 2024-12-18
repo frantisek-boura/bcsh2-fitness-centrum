@@ -47,6 +47,7 @@
                     <Button Name="lessonsButton" Content="Lessons" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LessonsButton_Click" />
                     <Button Name="reservationsButton" Content="Reservations" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="ReservationsButton_Clicked" />
                     <Button Name="logInButton" Content="Log In" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LogInButton_Clicked" />
+                    <Button Name="createUserButton" Content="Create User" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CreateUserButton_Clicked" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                     <Button Name="logOutButton" Content="Log Out" Margin="2" Height="50" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="LogOutButton_Clicked" />

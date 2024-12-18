@@ -29,6 +29,10 @@ namespace FitnessApp.Model
             {
                 if (_name != value)
                 {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return;
+                    }
                     _name = value;
                     OnPropertyChanged();
                 }
@@ -75,6 +79,10 @@ namespace FitnessApp.Model
             {
                 if (_type != value)
                 {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return;
+                    }
                     _type = value;
                     OnPropertyChanged();
                 }

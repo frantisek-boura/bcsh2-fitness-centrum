@@ -25,6 +25,9 @@
     <Compile Update="View\LessonsAddDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CreateUserDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\ReservationsEditDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="View\CreateUserDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\ReservationsEditDialog.xaml">
       <SubType>Designer</SubType>
     </Page>

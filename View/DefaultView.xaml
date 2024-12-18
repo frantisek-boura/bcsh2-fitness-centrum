@@ -9,6 +9,7 @@
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Label FontSize="40" Content="Fitness App"/>
+            <Label FontSize="20" HorizontalAlignment="Center" Content="{Binding UILogin}"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -27,6 +27,10 @@ namespace FitnessApp.Model
             {
                 if (_firstName != value)
                 {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return;
+                    }
                     _firstName = value;
                     OnPropertyChanged();
                 }
@@ -41,6 +45,10 @@ namespace FitnessApp.Model
             {
                 if (_lastName != value)
                 {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return;
+                    }
                     _lastName = value;
                     OnPropertyChanged();
                 }

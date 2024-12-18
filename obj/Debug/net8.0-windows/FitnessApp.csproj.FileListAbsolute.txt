@@ -145,3 +145,5 @@ C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\DefaultView
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LogInView.g.cs
 C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\LogInView.baml
 C:\Users\elpha\source\repos\FitnessApp\bin\Debug\net8.0-windows\BCrypt.Net-Next.dll
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\CreateUserDialog.g.cs
+C:\Users\elpha\source\repos\FitnessApp\obj\Debug\net8.0-windows\View\CreateUserDialog.baml
